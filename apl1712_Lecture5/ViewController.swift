@@ -10,9 +10,15 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var textField: UITextField!
+    
+    @IBOutlet weak var textLabel: UILabel!
+    
+    var theString = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,5 +27,30 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func putTextInLabel(sender: UIButton) {
+        
+        let pressedButton = sender.tag
+        
+        if let text = textField.text {
+            theString = text
+        }
+        switch pressedButton {
+        case 0:
+            theString = textField.text ?? ""
+        case 1:
+            theString = theString.lowercased()
+        case 2:
+            theString = theString.uppercased()
+        case 3:
+            var characters = [Character] (theString)
+            characters = characters.reversed()
+            theString = String(characters)
+        default:
+            print("OOPS! This shouldn't have happened. Double check your storyboard to ensure that all tags are properly set.")
+        }
+       
+        textLabel.text = theString
+        
+    }
 }
 
